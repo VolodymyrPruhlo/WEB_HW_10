@@ -1,0 +1,102 @@
+body {
+  font-family: sans-serif;
+  min-height: 100vh; /* Ensure the page content fills the full height of the viewport */
+  margin-bottom: 100px; /* Space for the footer */
+}
+
+.tags-box {
+  text-align: right;
+}
+
+.tags-box h2 {
+  margin-top: 0;
+}
+
+.tag-item {
+  display: block;
+  margin: 4px;
+}
+
+.quote {
+  padding: 10px;
+  margin-bottom: 30px;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px #333333;
+}
+
+.quote small.author {
+  font-weight: bold;
+  color: #3677E8;
+}
+
+.quote span.text {
+  display: block;
+  margin-bottom: 5px;
+  font-size: large;
+  font-style: italic;
+}
+
+.quote .tags {
+  margin-top: 10px;
+}
+
+.tag {
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: small;
+  background-color: #7CA3E6;
+}
+
+a.tag:hover {
+  text-decoration: none;
+}
+
+
+/* Footer CSS */
+.footer {
+  background-color: #f5f5f5;
+  border-top: 1px solid #e7e7e7;
+  padding: 20px 0;
+  position: relative; /* Якщо ви хочете, щоб футер був внизу, але не фіксованим */
+  bottom: 0;
+  width: 100%;
+  height: 150px; /* Fixed height of the footer */
+}
+
+
+.container {
+  padding-bottom: 50px; /* Додати відступ знизу, який еквівалентний висоті футера */
+}
+
+
+.error {
+  color: red;
+}
+
+.header-box {
+  padding-bottom: 40px;
+}
+
+.header-box p {
+  margin-top: 30px;
+  float: right;
+}
+
+.author-details {
+  width: 80%;
+}
+
+.author-description {
+  text-align: justify;
+  margin-bottom: 20px;
+}
+
+ul.pager {
+  margin-bottom: 100px;
+}
+
+.margin-left {
+  margin-right: 30px;
+}

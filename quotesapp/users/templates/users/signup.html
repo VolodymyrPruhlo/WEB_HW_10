@@ -1,0 +1,57 @@
+{% extends "quotes/base.html" %}
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'quotes:main' %}">Quotes</a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav1">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">Sign Up</h3>
+                <form action="{% url 'users:signup' %}" method="post" accept-charset="utf-8">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">Username</label>
+                        <input type="text" name="username" class="form-control" id="id_username" value="{{ form.username.value|default_if_none:'' }}" placeholder="Enter username" />
+                        {{ form.username.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password1">Password</label>
+                        <input type="password" name="password1" class="form-control" id="id_password1" value="{{ form.password1.value|default_if_none:'' }}" placeholder="Enter password" />
+                        {{ form.password1.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password2">Confirm Password</label>
+                        <input type="password" name="password2" class="form-control" id="id_password2" value="{{ form.password2.value|default_if_none:'' }}" placeholder="Confirm password" />
+                        {{ form.password2.errors }}
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

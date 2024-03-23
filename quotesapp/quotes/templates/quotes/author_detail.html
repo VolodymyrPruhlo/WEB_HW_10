@@ -1,0 +1,93 @@
+{% extends "quotes/base.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'quotes:main' %}">Quotes</a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAuthenticated"
+            aria-controls="navbarNavAuthenticated"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAuthenticated">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'authors:add_author' %}">Add author</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'quotes:add_quote' %}">Add quote</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'quotes:add_tag' %}">Add tag</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Welcome, <b>{{ user.username }}</b></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% else %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'quotes:main' %}">Quotes</a>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavUnauthenticated"
+            aria-controls="navbarNavUnauthenticated"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavUnauthenticated">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:signup' %}">Sign up</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endif %}
+<div class="author-details">
+    <h3 class="author-title">{{ name }}</h3>
+    <p>
+        <strong>Born:</strong>
+        <span class="author-born-date">{{ born_date }}</span>
+        <span class="author-born-location">{{ born_location }}</span>
+    </p>
+    <p>
+        <strong>Description:</strong>
+    </p>
+    <div class="author-description">
+        {{ description }}
+    </div>
+<!--    <form action="{% url 'authors:delete_author' author.id %}" method="post" style="display:inline;">-->
+<!--        {% csrf_token %}-->
+<!--        <input type="submit" value="Видалити" onclick="return confirm('Ви впевнені? Всі цитати цього автора також будуть видалені.');">-->
+<!--    </form>-->
+    <div class="btn-group" style="margin-top: 20px;">
+        <form action="{% url 'authors:delete_author' author.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Ви впевнені? Всі цитати цього автора також будуть видалені.');">Delete</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
