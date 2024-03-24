@@ -74,7 +74,7 @@
     <div class="quote">
         <span class="text">{{ quote.quote }}</span>
         <span>by
-            <small class="author">{{ quote.author }}</small>
+            <small class="author"><a href="{% url 'quotes:all_quote_by_author' author_id=quote.author.id %}">{{ quote.author }}</a></small>
             <a href="{% url 'quotes:author_detail' author_id=quote.author.id %}">(about)</a>
         </span>
         <div class="tags">

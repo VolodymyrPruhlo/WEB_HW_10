@@ -79,7 +79,7 @@ def quotes_by_author(request, author_id):
     quotes = Quote.objects.filter(author=author)
     context = {
         'author': author,
-        'quotes': quotes  
+        'quotes': quotes
     }
     return render(request, 'quotes/quotes_by_author.html', context)
 
