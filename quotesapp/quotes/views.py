@@ -78,8 +78,8 @@ def quotes_by_author(request, author_id):
     author = get_object_or_404(Author, pk=author_id)
     quotes = Quote.objects.filter(author=author)
     context = {
-        'author': author,  # Передаємо об'єкт автора, а не лише ім'я
-        'quotes': quotes  # Передаємо набір цитат
+        'author': author,
+        'quotes': quotes  
     }
     return render(request, 'quotes/quotes_by_author.html', context)
 
