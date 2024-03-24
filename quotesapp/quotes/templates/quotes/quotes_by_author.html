@@ -66,57 +66,33 @@
     </div>
 </nav>
 {% endif %}
-
-<div class="row">
-    <div class="col-md-8">
-        {% for quote in page_obj %}
-            <div class="quote">
-                <span class="text">{{ quote.quote }}</span>
-                <span>by
-                    <small class="author"><a href="{% url 'quotes:all_quote_by_author' author_id=quote.author.id %}">{{ quote.author.name }}</a></small>
-                    <a href="{% url 'quotes:author_detail' author_id=quote.author.id %}">(about)</a>
-                </span>
-                <div class="tags">
-                    Tags:
-                    {% for tag in quote.tags.all %}
-                        <a href="{% url 'quotes:quotes_by_tag' tag_name=tag.name %}" class="tag">{{ tag.name }}</a>
-                    {% endfor %}
-                </div>
-                {% if request.user.is_authenticated %}
-                    <div class="btn-group" style="margin-top: 20px;">
-                        <form action="{% url 'quotes:delete_quote' quote.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Ви впевнені?');">Delete</button>
-                        </form>
-                    </div>
-                {% else %}
-                {% endif %}
-            </div>
-        {% endfor %}
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a class="btn btn-primary" href="?page=1">&laquo; first</a>
-                    <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">previous</a>
-                {% endif %}
-                <span class="current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span>
-                {% if page_obj.has_next %}
-                    <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">next</a>
-                    <a class="btn btn-primary" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
+<h3>
+    Viewing author:
+    <a href="{% url 'quotes:all_quote_by_author' author_id=author.id %}">{{ author.name }}</a>
+</h3>
+{% for quote in quotes %}
+    <div class="quote">
+        <span class="text">{{ quote.quote }}</span>
+        <span>by
+            <small class="author">{{ quote.author }}</small>
+            <a href="{% url 'quotes:author_detail' author_id=quote.author.id %}">(about)</a>
+        </span>
+        <div class="tags">
+            Tags:
+            {% for tag in quote.tags.all %}
+                <a href="{% url 'quotes:quotes_by_tag' tag_name=tag.name %}" class="tag">{{ tag.name }}</a>
+            {% endfor %}
         </div>
+        {% if request.user.is_authenticated %}
+            <div class="btn-group" style="margin-top: 20px;">
+                <form action="{% url 'quotes:delete_quote' quote.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Ви впевнені?');">Delete</button>
+                </form>
+            </div>
+        {% else %}
+        {% endif %}
     </div>
+{% endfor %}
 
-    <div class="col-md-4 tags-box">
-        <h2>Top Ten tags</h2>
-        {% for tag in most_common_tags %}
-            <span class="tag-item">
-                <a class="tag" href="{% url 'quotes:quotes_by_tag' tag_name=tag.name %}">{{ tag.name }}</a>
-            </span>
-        {% endfor %}
-    </div>
-</div>
 {% endblock %}

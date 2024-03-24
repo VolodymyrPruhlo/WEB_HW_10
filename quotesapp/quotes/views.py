@@ -1,4 +1,3 @@
-from django.urls import path
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from .models import Tag, Quote
@@ -73,3 +72,14 @@ def delete_quote(request, quote_id):
         quote.delete()
         return redirect(reverse('quotes:main'))
     return render(request, 'quotes/confirm_delete.html', {'object': quote})
+
+
+def quotes_by_author(request, author_id):
+    author = get_object_or_404(Author, pk=author_id)
+    quotes = Quote.objects.filter(author=author)
+    context = {
+        'author': author,  # Передаємо об'єкт автора, а не лише ім'я
+        'quotes': quotes  # Передаємо набір цитат
+    }
+    return render(request, 'quotes/quotes_by_author.html', context)
+

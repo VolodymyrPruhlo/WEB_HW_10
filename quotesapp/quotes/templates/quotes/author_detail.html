@@ -83,11 +83,14 @@
 <!--        {% csrf_token %}-->
 <!--        <input type="submit" value="Видалити" onclick="return confirm('Ви впевнені? Всі цитати цього автора також будуть видалені.');">-->
 <!--    </form>-->
-    <div class="btn-group" style="margin-top: 20px;">
-        <form action="{% url 'authors:delete_author' author.id %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Ви впевнені? Всі цитати цього автора також будуть видалені.');">Delete</button>
-        </form>
-    </div>
+    {% if request.user.is_authenticated %}
+        <div class="btn-group" style="margin-top: 20px;">
+            <form action="{% url 'authors:delete_author' author.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Ви впевнені? Всі цитати цього автора також будуть видалені.');">Delete</button>
+            </form>
+        </div>
+    {% else %}
+    {% endif %}
 </div>
 {% endblock %}
