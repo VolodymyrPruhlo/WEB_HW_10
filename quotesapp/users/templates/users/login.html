@@ -51,6 +51,11 @@
                             </div>
                         {% endif %}
                         <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                        <a class="btn btn-primary btn-block" href="{% url 'users:password_reset' %}">Reset password</a>
+<!--                        <input type="reset" value="Reset" class="btn btn-primary btn-block"/>-->
+<!--                        <div class="small text-center">-->
+<!--                            <a class="btn btn-primary btn-block" href="{% url 'users:password_reset' %}"><i>Reset</i></a>-->
+<!--                        </div>-->
                     </div>
                 </form>
             </div>
